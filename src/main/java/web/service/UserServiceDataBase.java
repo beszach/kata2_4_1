@@ -2,6 +2,7 @@ package web.service;
 
 import lombok.extern.slf4j.Slf4j;
 
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import web.dao.UserDao;
 import web.model.User;
@@ -15,13 +16,16 @@ import java.util.List;
 public class UserServiceDataBase implements UserService {
 
     private final UserDao userDao;
+    private final PasswordEncoder passwordEncoder;
 
-    public UserServiceDataBase(UserDao userDao) {
+    public UserServiceDataBase(UserDao userDao, PasswordEncoder passwordEncoder) {
         this.userDao = userDao;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @Override
     public void add(User user) {
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         userDao.add(user);
         log.info("Add user: {}", user);
     }
@@ -29,6 +33,7 @@ public class UserServiceDataBase implements UserService {
 
     @Override
     public void update(User user) {
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         userDao.update(user);
         log.info("Update user: {}", user);
     }

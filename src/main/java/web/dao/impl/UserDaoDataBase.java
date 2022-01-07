@@ -1,7 +1,5 @@
 package web.dao.impl;
 
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Repository;
 import web.dao.UserDao;
 import web.model.User;
@@ -12,25 +10,17 @@ import java.util.List;
 @Repository("userRep")
 public class UserDaoDataBase implements UserDao {
 
-    private final PasswordEncoder passwordEncoder;
-
     @PersistenceContext
     private EntityManager entityManager;
 
-    public UserDaoDataBase(@Qualifier("passwordEncoder") PasswordEncoder passwordEncoder) {
-        this.passwordEncoder = passwordEncoder;
-    }
-
     @Override
     public void add(User user) {
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
         entityManager.persist(user);
     }
 
 
     @Override
     public void update(User userUpdated) {
-        userUpdated.setPassword(passwordEncoder.encode(userUpdated.getPassword()));
         entityManager.merge(userUpdated);
     }
 

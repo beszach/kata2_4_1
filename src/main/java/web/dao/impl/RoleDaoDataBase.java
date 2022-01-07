@@ -13,9 +13,6 @@ public class RoleDaoDataBase implements RoleDao {
     @PersistenceContext
     private EntityManager entityManager;
 
-    public RoleDaoDataBase() {
-    }
-
     @Override
     public void add(Role role) {
         entityManager.persist(role);
