@@ -12,8 +12,11 @@ import java.util.Locale;
 @Component
 public class RoleFormatter implements Formatter<Role> {
 
-    @Autowired
-    RoleService roleService;
+    private final RoleService roleService;
+
+    public RoleFormatter(RoleService roleService) {
+        this.roleService = roleService;
+    }
 
     @Override
     public Role parse(String text, Locale locale) throws ParseException {
@@ -23,6 +26,6 @@ public class RoleFormatter implements Formatter<Role> {
 
     @Override
     public String print(Role object, Locale locale) {
-        return (object != null ? object.getId().toString() : "");
+        return object.getId().toString();
     }
 }

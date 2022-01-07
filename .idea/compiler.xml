@@ -8,8 +8,9 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="kata_2_3_1" />
-        <module name="kata2_4_1-master" />
         <module name="kata_2_4_1" />
+        <module name="kata2_4_1-master" />
+        <module name="kata2_4_1" />
       </profile>
     </annotationProcessing>
   </component>
